@@ -23,6 +23,7 @@
 
         setLogLevel('Debug');
 
+        // Global variables provided by the environment
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
@@ -57,7 +58,6 @@
                         console.log("Signed in anonymously. User ID:", window.userId);
                     }
                     window.isAuthReady = true;
-                    // Log the App ID for debugging/context
                     console.log("Current App ID:", appId);
                 });
 
@@ -66,7 +66,7 @@
             }
         }
 
-        // Attach function to window for access
+        // Attach function to window for access and initialize
         window.initFirebase = initFirebase;
         initFirebase();
     </script>
@@ -78,8 +78,6 @@
             /* Smooth scrolling for navigation links */
             scroll-behavior: smooth;
         }
-
-        /* *** COLOR SCHEME FIXES: *** */
 
         /* Default (Light) Mode Body Styles */
         body {
@@ -128,7 +126,8 @@
     <!-- Header & Navigation -->
     <header class="sticky top-0 z-50 transition-colors duration-500 shadow-xl bg-white/95 dark:bg-[#050505]/95 backdrop-blur-sm border-b border-indigo-200 dark:border-indigo-900">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-wider logo" data-en="Satyanarayan Jyotishalay" data-bn="सत्यनारायण ज्योतिषालय">Satyanarayan Jyotishalay</a>
+            <!-- Corrected data-bn to use Bengali Script -->
+            <a href="#" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-wider logo" data-en="Satyanarayan Jyotishalay" data-bn="সত্যনারায়ণ জ্যোতিষালয়">Satyanarayan Jyotishalay</a>
             
             <!-- Desktop Nav -->
             <nav class="hidden md:flex space-x-6">
@@ -157,12 +156,10 @@
 
     <main>
         
-        <!-- Hero Section - Adapted for Light BG -->
+        <!-- Hero Section -->
         <section id="hero" class="py-20 md:py-32 bg-cover bg-center text-center transition-colors duration-500 bg-[#f5f5f5] dark:bg-[#0a0a0a]" style="background-image: url('https://placehold.co/1920x600/f5f5f5/000000?text=Cosmic+Background+Light')" data-en-text="Unlock Your Cosmic Blueprint" data-bn-text="আপনার মহাজাগতিক নকশা উন্মোচন করুন">
             <div class="container mx-auto px-4">
-                <!-- Heading is now black in light mode, white in dark mode -->
                 <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight text-[#000000] dark:text-white hero-title">Unlock Your Cosmic Blueprint</h1>
-                <!-- Subtext is now dark gray in light mode, light gray in dark mode -->
                 <p class="text-xl md:text-2xl text-gray-800 dark:text-gray-300 max-w-3xl mx-auto mb-8 hero-subtitle" data-en="Navigate life's path with clarity and foresight through our personalized Vedic and Western astrological insights." data-bn="আমাদের ব্যক্তিগতকৃত বৈদিক এবং পাশ্চাত্য জ্যোতিষ অন্তর্দৃষ্টির মাধ্যমে স্পষ্টতা ও দূরদর্শিতার সাথে জীবনের পথ চালিত করুন।">
                     Navigate life's path with clarity and foresight through our personalized Vedic and Western astrological insights.
                 </p>
@@ -181,7 +178,6 @@
                     <div class="card card-3d bg-white dark:bg-[#1a1a1a] p-8 rounded-xl shadow-lg transform perspective-1000 transition-all duration-500">
                         <i data-lucide="compass" class="w-10 h-10 text-indigo-600 dark:text-indigo-400 mb-4"></i>
                         <h3 class="text-2xl font-semibold mb-3 text-[#000000] dark:text-white card-title" data-en="Ethical Guidance" data-bn="নৈতিক নির্দেশনা">Ethical Guidance</h3>
-                        <!-- Text is dark gray in light mode, light gray in dark mode -->
                         <p class="text-gray-700 dark:text-gray-300 card-text" data-en="We prioritize confidentiality and provide actionable, honest advice, focusing on empowerment, not fear." data-bn="আমরা গোপনীয়তাকে অগ্রাধিকার দিই এবং ভয় নয়, ক্ষমতায়নের উপর মনোযোগ দিয়ে কার্যকর, সৎ পরামর্শ প্রদান করি।">We prioritize confidentiality and provide actionable, honest advice, focusing on empowerment, not fear.</p>
                     </div>
 
@@ -246,7 +242,6 @@
                     <div class="carousel-container h-40">
                         <div class="carousel-track" id="testimonial-track">
                             <div class="carousel-slide text-center p-4">
-                                <!-- Text is dark gray in light mode, light gray in dark mode -->
                                 <p class="text-xl italic mb-4 text-gray-700 dark:text-gray-300 testimonial-text" data-en="&quot;The reading was incredibly accurate and provided the clarity I needed to make a difficult career decision. Highly recommended!&quot;" data-bn="&quot;পঠনটি অবিশ্বাস্যভাবে সঠিক ছিল এবং একটি কঠিন কর্মজীবনের সিদ্ধান্ত নিতে আমার প্রয়োজনীয় স্পষ্টতা দিয়েছে। অত্যন্ত সুপারিশকৃত!&quot;">
                                     "The reading was incredibly accurate and provided the clarity I needed to make a difficult career decision. Highly recommended!"
                                 </p>
@@ -267,7 +262,7 @@
                         </div>
                     </div>
                     
-                    <!-- Carousel Controls - Colors adjusted for contrast -->
+                    <!-- Carousel Controls -->
                     <button class="absolute top-1/2 left-0 transform -translate-y-1/2 p-2 rounded-full bg-indigo-500/50 hover:bg-indigo-600 text-white transition-opacity duration-300" onclick="moveCarousel(-1)">
                         <i data-lucide="chevron-left" class="w-6 h-6"></i>
                     </button>
@@ -282,12 +277,12 @@
         <section id="about" class="py-16 md:py-24 transition-colors duration-500 dark:bg-[#0a0a0a] bg-[#f5f5f5]">
             <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
                 
-                <!-- Image Placeholder - Updated text colors -->
+                <!-- Image Placeholder -->
                 <div class="order-2 md:order-1 transform hover:rotate-1 shadow-2xl transition-transform duration-500 rounded-xl overflow-hidden">
                     <img src="https://placehold.co/800x600/5a67d8/ffffff?text=Astrologer+Image" alt="Lead Astrologer" class="w-full h-auto object-cover">
                 </div>
                 
-                <!-- Content - Updated text colors -->
+                <!-- Content -->
                 <div class="order-1 md:order-2">
                     <h2 class="text-4xl md:text-5xl font-bold mb-6 text-[#000000] dark:text-white section-title" data-en="Meet Our Lead Astrologer" data-bn="আমাদের প্রধান জ্যোতিষীর সাথে দেখা করুন">Meet Our Lead Astrologer</h2>
                     <p class="text-lg mb-4 text-gray-700 dark:text-gray-300 about-text-1" data-en="Founded by **Dr. Anya Sharma**, Satyanarayan Jyotishalay is built on two decades of dedicated study in both ancient Vedic principles and modern psychological astrology. Dr. Sharma's mission is to bridge the gap between cosmic influence and practical, everyday decision-making." data-bn="**ডঃ অন্য শর্মা** দ্বারা প্রতিষ্ঠিত, সত্যনারায়ণ জ্যোতিষালয় প্রাচীন বৈদিক নীতি এবং আধুনিক মনস্তাত্ত্বিক জ্যোতিষশাস্ত্র উভয় ক্ষেত্রেই দুই দশকের নিবেদিত অধ্যয়নের উপর নির্মিত। ডঃ শর্মার লক্ষ্য হল মহাজাগতিক প্রভাব এবং ব্যবহারিক, দৈনন্দিন সিদ্ধান্ত গ্রহণের মধ্যে ব্যবধান পূরণ করা।">
@@ -308,9 +303,7 @@
                 
                 <form id="contact-form" class="bg-gray-100 dark:bg-[#1a1a1a] p-8 rounded-xl shadow-2xl space-y-6">
                     <div>
-                        <!-- Label text is black in light mode, white in dark mode -->
                         <label for="name" class="block text-sm font-medium mb-2 text-[#000000] dark:text-white label-name" data-en="Your Name" data-bn="আপনার নাম">Your Name</label>
-                        <!-- Input fields need light BG/Dark text in light mode, Dark BG/Light text in dark mode -->
                         <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-[#000000] dark:text-white focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300">
                     </div>
                     <div>
@@ -360,8 +353,9 @@
         const totalSlides = 3; 
 
         // --- TRANSLATION DATA (English <--> Bengali) ---
+        // CONFIRMED: All Bengali text is now in Bengali script (not Hindi Devanagari)
         const translationMap = {
-            'Satyanarayan Jyotishalay': 'सत्यनारायण ज्योतिषालय',
+            'Satyanarayan Jyotishalay': 'সত্যনারায়ণ জ্যোতিষালয়',
             'Why Us': 'কেন আমরা',
             'Services': 'পরিষেবাসমূহ',
             'About': 'আমাদের সম্পর্কে',
@@ -477,6 +471,7 @@
             data.userId = window.userId;
 
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            // Use public path for contact forms
             const collectionPath = `/artifacts/${appId}/public/data/contact_messages`;
             
             async function attemptAddDoc() {
@@ -486,6 +481,7 @@
 
                 while (attempt < maxRetries) {
                     try {
+                        // Firebase Firestore addDoc function needs to be used with the global db instance and imported collection function
                         docRef = await window.addDoc(window.collection(window.db, collectionPath), data);
                         break;
                     } catch (error) {
@@ -493,7 +489,6 @@
                         if (attempt >= maxRetries) throw error;
                         const delay = Math.pow(2, attempt) * 1000;
                         await new Promise(resolve => setTimeout(resolve, delay));
-                        // console.log(`Retry attempt ${attempt} after ${delay}ms`);
                     }
                 }
                 return docRef;
@@ -539,7 +534,7 @@
 
         // --- INITIALIZATION - EVERYTHING RUNS AFTER THE DOM IS READY ---
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Set up Theme (now runs reliably on DOM ready)
+            // 1. Set up Theme 
             setupThemeToggle();
 
             // 2. Initialize Lucide Icons
